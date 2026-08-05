@@ -1,0 +1,104 @@
+.project-card {
+  background: var(--bg-raised);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  transition: border-color 0.25s var(--ease-out);
+}
+
+.project-card__header {
+  width: 100%;
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 16px;
+  background: none;
+  border: none;
+  text-align: left;
+  padding: 22px 24px;
+  cursor: pointer;
+  color: inherit;
+}
+
+.project-card__title {
+  font-size: 19px;
+  font-weight: 600;
+  margin-top: 6px;
+}
+
+.project-card__summary {
+  margin-top: 6px;
+  font-size: 14px;
+  color: var(--text-secondary);
+}
+
+.project-card__chevron {
+  font-family: var(--font-mono);
+  font-size: 18px;
+  color: var(--gold);
+  flex-shrink: 0;
+  transition: transform 0.3s var(--ease-out);
+}
+
+.project-card__chevron.is-open {
+  transform: rotate(180deg);
+}
+
+.project-card__body-inner {
+  padding: 0 24px 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  border-top: 1px solid var(--border);
+  padding-top: 18px;
+}
+
+.project-card__description {
+  font-size: 14px;
+  line-height: 1.7;
+  color: var(--text-primary);
+}
+
+.project-card__files {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.project-card__files a {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  color: var(--gold);
+  border: 1px solid var(--border-strong);
+  border-radius: var(--radius);
+  padding: 6px 10px;
+  transition: background 0.2s var(--ease-out);
+}
+
+.project-card__link {
+  align-self: flex-start;
+  font-family: var(--font-mono);
+  font-size: 13px;
+  color: var(--gold);
+}
+
+.project-card__date {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--text-muted);
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .project-card:hover {
+    border-color: var(--border-strong);
+  }
+  .project-card__files a:hover {
+    background: var(--bg-raised-2);
+  }
+  .project-card__link:hover {
+    text-decoration: underline;
+  }
+}
