@@ -2,18 +2,14 @@ name = "portfolio"
 pages_build_output_dir = "dist"
 compatibility_date = "2026-01-01"
 
-# The three items below are ONLY needed if you want to run `wrangler pages dev`
-# locally with real KV/R2 access. They do NOT affect the deployed site — for
-# the deployed site, add the same bindings in the Cloudflare dashboard under
-# Pages project > Settings > Bindings. Full walkthrough in README.md.
+[[kv_namespaces]]
+binding = "PORTFOLIO_KV"
+id = "3aba7a1e49d5444fb8e9abab175f6ed2"
 
-# [[kv_namespaces]]
-# binding = "PORTFOLIO_KV"
-# id = "your-kv-namespace-id"
+[[r2_buckets]]
+binding = "PORTFOLIO_BUCKET"
+bucket_name = "portfolio-files"
 
-# [[r2_buckets]]
-# binding = "PORTFOLIO_BUCKET"
-# bucket_name = "your-bucket-name"
-
-# [vars]
-# PUBLIC_BUCKET_URL = "https://pub-xxxxxxxxxxxx.r2.dev"
+[vars]
+PUBLIC_BUCKET_URL = "https://pub-ff689358cae24e9e985d57ad4fe797ff.r2.dev"
+ADMIN_USERNAME = "nikhiladmin"
