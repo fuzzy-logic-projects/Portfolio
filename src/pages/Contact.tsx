@@ -39,7 +39,7 @@ export default function Contact() {
           animate={{ opacity: 1, y: 0 }}
           transition={sectionTransition}
         >
-          Get in touch
+          Contact Me
         </motion.h1>
 
         <motion.div
@@ -49,7 +49,8 @@ export default function Contact() {
         >
           {sent ? (
             <p className="contact-page__success">
-              Thanks — your message is on its way. I'll get back to you soon.
+              Thanks — your message is on its way. I'll get back to you soon. (If you don't see my
+              reply, check your spam folder — first-time emails from me sometimes land there.)
             </p>
           ) : (
             <form className="contact-page__form" onSubmit={handleSubmit} noValidate>
