@@ -2,7 +2,6 @@ import { motion, useReducedMotion } from 'framer-motion';
 import { useContent } from '../context/ContentContext';
 import { Loading, ErrorState } from '../components/Loading';
 import { Markdown } from '../components/Markdown';
-import { ScrollCue } from '../components/ScrollCue';
 import { useScrollReveal } from '../hooks/useScrollReveal';
 import './About.css';
 
@@ -40,8 +39,6 @@ export default function About() {
         >
           About
         </motion.h1>
-
-        <ScrollCue showLabel={false} />
 
         {blocks.length === 0 ? (
           <p className="about-page__empty">Add About content from the admin dashboard.</p>
