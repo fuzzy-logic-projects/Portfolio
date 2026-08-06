@@ -6,6 +6,7 @@ import { SiteHeader } from './components/SiteHeader';
 import { PageTransition } from './components/PageTransition';
 import Home from './pages/Home';
 import About from './pages/About';
+import Contact from './pages/Contact';
 import CategoryPage from './pages/CategoryPage';
 import AdminLogin from './pages/AdminLogin';
 import AdminDashboard from './pages/AdminDashboard';
@@ -47,6 +48,7 @@ function AppShell() {
           <Routes location={location} key={location.pathname}>
             <Route path="/" element={<Home />} />
             <Route path="/about" element={<About />} />
+            <Route path="/contact" element={<Contact />} />
             <Route path="/projects/:slug" element={<CategoryPage />} />
             <Route path="/admin" element={<AdminLogin />} />
             <Route path="/admin/dashboard" element={<AdminDashboard />} />
