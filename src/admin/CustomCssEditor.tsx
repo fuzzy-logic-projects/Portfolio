@@ -10,13 +10,13 @@ const THEME_END = '/* theme:end */';
 type ColorKey = 'background' | 'primary' | 'secondary' | 'accent' | 'bodyText' | 'textSecondary' | 'textMuted';
 
 const DEFAULT_COLORS: Record<ColorKey, string> = {
-  background: '#1c1c1c',
-  primary: '#bfa181',
-  secondary: '#d4c5b0',
-  accent: '#f4f4f4',
-  bodyText: '#e8e6e1',
-  textSecondary: '#a8a29b',
-  textMuted: '#706b63',
+  background: '#0d0d0d',
+  primary: '#f47521',
+  secondary: '#c9a88c',
+  accent: '#ffffff',
+  bodyText: '#f2f2f0',
+  textSecondary: '#b3aea8',
+  textMuted: '#726d66',
 };
 
 const CSS_VAR: Record<ColorKey, string> = {
@@ -31,8 +31,8 @@ const CSS_VAR: Record<ColorKey, string> = {
 
 const SWATCHES: { key: ColorKey; label: string; hint: string }[] = [
   { key: 'background', label: 'Background', hint: 'Page background' },
-  { key: 'primary', label: 'Primary', hint: 'Gold accents, buttons, links' },
-  { key: 'secondary', label: 'Secondary', hint: 'Warm beige accents' },
+  { key: 'primary', label: 'Primary', hint: 'Orange accents, buttons, links' },
+  { key: 'secondary', label: 'Secondary', hint: 'Warm taupe accents' },
   { key: 'accent', label: 'Accent', hint: 'Headings, brand name' },
   { key: 'bodyText', label: 'Body text', hint: 'Main paragraph text' },
 ];
