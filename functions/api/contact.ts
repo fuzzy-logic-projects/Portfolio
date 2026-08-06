@@ -59,5 +59,19 @@ export const onRequestPost: PagesFunction<Env> = async ({ request, env }) => {
     return Response.json({ error: 'Could not send your message. Please try again.' }, { status: 502 });
   }
 
+  // Apps Script web apps always answer HTTP 200, even when the script's own
+  // try/catch caught an internal error — so scriptRes.ok alone can't tell us
+  // whether the emails actually sent. Check the JSON body it returns too.
+  let scriptBody: { ok?: boolean; error?: string };
+  try {
+    scriptBody = await scriptRes.json();
+  } catch {
+    return Response.json({ error: 'Could not send your message. Please try again.' }, { status: 502 });
+  }
+
+  if (!scriptBody.ok) {
+    return Response.json({ error: 'Could not send your message. Please try again.' }, { status: 502 });
+  }
+
   return Response.json({ ok: true });
 };
