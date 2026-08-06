@@ -58,6 +58,12 @@ export const api = {
       body: JSON.stringify({ css }),
     }),
 
+  sendContact: (data: { name: string; email: string; message: string; company?: string }) =>
+    request<{ ok: true }>('/api/contact', {
+      method: 'POST',
+      body: JSON.stringify(data),
+    }),
+
   uploadFile: async (file: File): Promise<{ url: string }> => {
     const formData = new FormData();
     formData.append('file', file);
