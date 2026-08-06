@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom';
 import { motion, useReducedMotion } from 'framer-motion';
 import { useContent } from '../context/ContentContext';
 import { CategoryCard } from '../components/CategoryCard';
@@ -107,9 +108,9 @@ export default function Home() {
           ref={setStepRef(stepIndex('contact'))}
           {...revealProps(stepIndex('contact'))}
         >
-          <a className="btn btn-primary" href={`mailto:${home.email}`}>
+          <Link className="btn btn-primary" to="/contact">
             Get in touch ↗
-          </a>
+          </Link>
         </motion.section>
       )}
     </div>
