@@ -43,9 +43,9 @@ export function SiteHeader({ name, categories, email }: SiteHeaderProps) {
             </NavLink>
           ))}
           {email && (
-            <a className="btn btn-primary site-header__cta" href={`mailto:${email}`}>
+            <Link className="btn btn-primary site-header__cta" to="/contact">
               Get in touch ↗
-            </a>
+            </Link>
           )}
         </nav>
 
@@ -89,13 +89,13 @@ export function SiteHeader({ name, categories, email }: SiteHeaderProps) {
               </NavLink>
             ))}
             {email && (
-              <a
-                href={`mailto:${email}`}
+              <Link
+                to="/contact"
                 onClick={() => setMenuOpen(false)}
                 className="btn btn-primary site-header__cta-mobile"
               >
                 Get in touch ↗
-              </a>
+              </Link>
             )}
           </motion.nav>
         )}
