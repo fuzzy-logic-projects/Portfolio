@@ -7,16 +7,24 @@ interface TypewriterHeadlineProps {
 }
 
 /** Typing plays out over roughly this long, regardless of text length. */
-const TARGET_DURATION_MS = 900;
+const TARGET_DURATION_MS = 1500;
 /** Clamp the per-character speed so very short/long text doesn't feel off. */
-const MIN_MS_PER_CHAR = 18;
-const MAX_MS_PER_CHAR = 55;
+const MIN_MS_PER_CHAR = 32;
+const MAX_MS_PER_CHAR = 80;
 
 /**
  * Types the headline out one character at a time when it first mounts, then
  * stops for good — this never repeats or loops. Falls back to showing the
  * full text instantly under prefers-reduced-motion. The full text is always
  * present for screen readers, even mid-animation.
+ *
+ * The full text is also rendered in normal flow at `visibility: hidden`,
+ * underneath the typed characters, so the heading's box (including however
+ * many lines it eventually wraps to) is reserved from the very first frame.
+ * Without this, a headline that wraps onto a second line partway through
+ * typing grows taller mid-animation — and since the hero centers its content
+ * vertically, that height change visibly shifts the already-typed text
+ * upward as it happens.
  */
 export function TypewriterHeadline({ text, className }: TypewriterHeadlineProps) {
   const reduce = useReducedMotion();
@@ -46,8 +54,11 @@ export function TypewriterHeadline({ text, className }: TypewriterHeadlineProps)
   const done = shown >= text.length;
 
   return (
-    <h1 className={className}>
-      <span aria-hidden="true">
+    <h1 className={className} style={{ position: 'relative' }}>
+      <span aria-hidden="true" style={{ visibility: 'hidden' }}>
+        {text}
+      </span>
+      <span aria-hidden="true" style={{ position: 'absolute', inset: 0 }}>
         {text.slice(0, shown)}
         {!done && <span className="typewriter-cursor" />}
       </span>

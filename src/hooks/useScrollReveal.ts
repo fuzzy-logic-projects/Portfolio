@@ -12,6 +12,12 @@ import { useReducedMotion } from 'framer-motion';
  *   - once a section has been revealed it stays revealed, so scrolling up
  *     past it doesn't hide it again
  *
+ * Steps that are already inside the viewport the moment this mounts (e.g. a
+ * short page, or just the first screen of a longer one) are revealed right
+ * away — still with their entrance animation, just not gated behind a
+ * scroll gesture the visitor has no reason to make. Everything below the
+ * fold still only reveals once the visitor actually scrolls it into view.
+ *
  * Respects prefers-reduced-motion: reveals everything immediately.
  */
 export function useScrollReveal(stepCount: number) {
@@ -40,8 +46,17 @@ export function useScrollReveal(stepCount: number) {
       return;
     }
 
-    revealedRef.current = new Set();
-    setRevealed(new Set());
+    const viewportHeight = window.innerHeight || document.documentElement.clientHeight;
+    const initial = new Set<number>();
+    stepRefs.current.forEach((el, index) => {
+      if (!el) return;
+      const rect = el.getBoundingClientRect();
+      if (rect.top < viewportHeight * 0.9 && rect.bottom > 0) {
+        initial.add(index);
+      }
+    });
+    revealedRef.current = initial;
+    setRevealed(initial);
 
     const observer = new IntersectionObserver(
       (entries) => {
@@ -66,8 +81,8 @@ export function useScrollReveal(stepCount: number) {
       { threshold: 0.15, rootMargin: '0px 0px -10% 0px' },
     );
 
-    stepRefs.current.forEach((el) => {
-      if (el) observer.observe(el);
+    stepRefs.current.forEach((el, index) => {
+      if (el && !initial.has(index)) observer.observe(el);
     });
 
     return () => observer.disconnect();

@@ -3,7 +3,6 @@ import { useContent } from '../context/ContentContext';
 import { Loading, ErrorState } from '../components/Loading';
 import { Markdown } from '../components/Markdown';
 import { ScrollCue } from '../components/ScrollCue';
-import { TypewriterHeadline } from '../components/TypewriterHeadline';
 import { useScrollReveal } from '../hooks/useScrollReveal';
 import './About.css';
 
@@ -33,9 +32,16 @@ export default function About() {
   return (
     <div className="container about-page">
       <div className="about-page__inner">
-        <TypewriterHeadline text="About" className="about-page__headline" />
+        <motion.h1
+          className="about-page__headline"
+          initial={reduce ? undefined : hiddenSection}
+          animate={{ opacity: 1, y: 0 }}
+          transition={sectionTransition}
+        >
+          About
+        </motion.h1>
 
-        <ScrollCue />
+        <ScrollCue showLabel={false} />
 
         {blocks.length === 0 ? (
           <p className="about-page__empty">Add About content from the admin dashboard.</p>

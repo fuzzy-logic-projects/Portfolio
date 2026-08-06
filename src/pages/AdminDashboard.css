@@ -202,6 +202,102 @@
   }
 }
 
+/* ---------- Custom CSS tab: live theme preview ---------- */
+.theme-preview {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 24px;
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+}
+
+.theme-preview__eyebrow {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+
+.theme-preview__heading {
+  font-family: var(--font-display);
+  font-size: 26px;
+  font-weight: 600;
+  color: var(--accent-light);
+  margin: 0;
+}
+
+.theme-preview__body {
+  font-size: 14px;
+  line-height: 1.6;
+  color: var(--text-primary);
+  margin: 0;
+}
+
+.theme-preview__secondary {
+  font-size: 13px;
+  color: var(--text-secondary);
+  margin: 0;
+}
+
+.theme-preview__card {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  margin-top: 4px;
+  padding: 14px;
+  background: var(--bg-raised);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+}
+
+.theme-preview__card-eyebrow {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.05em;
+  color: var(--gold);
+}
+
+.theme-preview__card-title {
+  font-family: var(--font-display);
+  font-size: 16px;
+  color: var(--accent-light);
+}
+
+.theme-preview__card-meta {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--text-muted);
+}
+
+.theme-preview__actions {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 8px;
+}
+
+.theme-preview__link {
+  font-family: var(--font-mono);
+  font-size: 13px;
+  color: var(--gold);
+}
+
+.theme-preview__btn {
+  cursor: default;
+}
+
+@media (min-width: 700px) {
+  .theme-preview {
+    position: sticky;
+    top: 16px;
+  }
+}
+
 @media (min-width: 700px) {
   .admin-grid-2 {
     grid-template-columns: 1fr 1fr;

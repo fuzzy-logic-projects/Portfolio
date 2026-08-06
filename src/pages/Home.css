@@ -17,7 +17,7 @@
 .hero .scroll-cue {
   position: absolute;
   left: 50%;
-  bottom: 40px;
+  bottom: 80px;
   transform: translateX(-50%);
   margin-top: 0;
 }

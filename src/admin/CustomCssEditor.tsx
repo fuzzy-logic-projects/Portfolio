@@ -7,7 +7,7 @@ import { api } from '../lib/api';
 const THEME_START = '/* theme:start */';
 const THEME_END = '/* theme:end */';
 
-type ColorKey = 'background' | 'primary' | 'secondary' | 'accent' | 'bodyText';
+type ColorKey = 'background' | 'primary' | 'secondary' | 'accent' | 'bodyText' | 'textSecondary' | 'textMuted';
 
 const DEFAULT_COLORS: Record<ColorKey, string> = {
   background: '#1c1c1c',
@@ -15,6 +15,8 @@ const DEFAULT_COLORS: Record<ColorKey, string> = {
   secondary: '#d4c5b0',
   accent: '#f4f4f4',
   bodyText: '#e8e6e1',
+  textSecondary: '#a8a29b',
+  textMuted: '#706b63',
 };
 
 const CSS_VAR: Record<ColorKey, string> = {
@@ -23,6 +25,8 @@ const CSS_VAR: Record<ColorKey, string> = {
   secondary: '--beige',
   accent: '--accent-light',
   bodyText: '--text-primary',
+  textSecondary: '--text-secondary',
+  textMuted: '--text-muted',
 };
 
 const SWATCHES: { key: ColorKey; label: string; hint: string }[] = [
@@ -31,6 +35,14 @@ const SWATCHES: { key: ColorKey; label: string; hint: string }[] = [
   { key: 'secondary', label: 'Secondary', hint: 'Warm beige accents' },
   { key: 'accent', label: 'Accent', hint: 'Headings, brand name' },
   { key: 'bodyText', label: 'Body text', hint: 'Main paragraph text' },
+];
+
+/** Every text color on the site beyond the main body copy above — split out
+ * so each one is individually pickable instead of only the single "Body
+ * text" swatch. */
+const TEXT_SWATCHES: { key: ColorKey; label: string; hint: string }[] = [
+  { key: 'textSecondary', label: 'Secondary text', hint: 'Nav links, bio text, card meta' },
+  { key: 'textMuted', label: 'Muted text', hint: 'Eyebrows, labels, least prominent text' },
 ];
 
 function buildThemeBlock(colors: Record<ColorKey, string>): string {
@@ -111,6 +123,33 @@ export function CustomCssEditor({ initial, onSaved }: { initial: string; onSaved
   return (
     <div className="admin-panel">
       <div className="admin-panel__subsection admin-panel__subsection--first">
+        <span className="field-label admin-panel__subsection-label">Live preview</span>
+        <p className="admin-panel__hint">
+          A rough mockup of the public site using whatever's currently picked below — nothing here is saved until
+          you press "Save changes."
+        </p>
+        <div className="theme-preview">
+          <span className="theme-preview__eyebrow">Index — Preview</span>
+          <h2 className="theme-preview__heading">Nikhil — Portfolio</h2>
+          <p className="theme-preview__body">
+            Body text looks like this across the site — project descriptions, the bio, and page copy.
+          </p>
+          <p className="theme-preview__secondary">Secondary text — nav links, captions, card meta.</p>
+          <div className="theme-preview__card">
+            <span className="theme-preview__card-eyebrow">WA-01</span>
+            <span className="theme-preview__card-title">Sample project</span>
+            <span className="theme-preview__card-meta">Web App · 2026</span>
+          </div>
+          <div className="theme-preview__actions">
+            <span className="theme-preview__link">A link ↗</span>
+            <button type="button" className="btn btn-primary theme-preview__btn" tabIndex={-1}>
+              Get in touch
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <div className="admin-panel__subsection">
         <div className="admin-panel__subsection-header">
           <span className="field-label admin-panel__subsection-label">Theme colors</span>
           <button type="button" className="btn" onClick={handleResetColors}>
@@ -123,6 +162,29 @@ export function CustomCssEditor({ initial, onSaved }: { initial: string; onSaved
         </p>
         <div className="admin-color-grid">
           {SWATCHES.map(({ key, label, hint }) => (
+            <label key={key} className="admin-color-swatch">
+              <input
+                type="color"
+                value={colors[key]}
+                onChange={(e) => handleColorChange(key, e.target.value)}
+                aria-label={label}
+              />
+              <span className="admin-color-swatch__text">
+                <span className="admin-color-swatch__label">{label}</span>
+                <span className="admin-color-swatch__hint">{hint}</span>
+              </span>
+            </label>
+          ))}
+        </div>
+      </div>
+
+      <div className="admin-panel__subsection">
+        <span className="field-label admin-panel__subsection-label">Text colors</span>
+        <p className="admin-panel__hint">
+          Body text above covers most paragraph copy. These cover the rest of the text roles on the site.
+        </p>
+        <div className="admin-color-grid">
+          {TEXT_SWATCHES.map(({ key, label, hint }) => (
             <label key={key} className="admin-color-swatch">
               <input
                 type="color"
