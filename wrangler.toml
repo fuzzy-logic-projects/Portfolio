@@ -13,3 +13,4 @@ bucket_name = "portfolio-files"
 [vars]
 PUBLIC_BUCKET_URL = "https://pub-ff689358cae24e9e985d57ad4fe797ff.r2.dev"
 ADMIN_USERNAME = "nikhiladmin"
+CONTACT_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbztJOAcUEpKD8P6SGzfLSKYbC6vq6dnXj4kGTxn8DZQvcifDWmPK-EoB6kIDENkVbE9KA/exec"
