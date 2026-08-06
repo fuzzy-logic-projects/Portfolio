@@ -74,6 +74,17 @@
   }
 }
 
+.site-header__cta {
+  margin-left: 8px;
+  padding: 8px 16px;
+  font-size: 12px;
+}
+
+.site-header__cta-mobile {
+  margin: 8px 24px 20px;
+  justify-content: center;
+}
+
 /* ---------- Mobile burger + dropdown (<900px) ---------- */
 .site-header__burger {
   display: flex;

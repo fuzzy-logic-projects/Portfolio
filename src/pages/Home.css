@@ -1,5 +1,11 @@
 .hero {
-  padding: 64px 24px 56px;
+  position: relative;
+  min-height: 100vh;
+  min-height: 100dvh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 24px;
 }
 
 .hero__headline {
@@ -8,8 +14,19 @@
   max-width: 720px;
 }
 
+.hero .scroll-cue {
+  position: absolute;
+  left: 50%;
+  bottom: 40px;
+  transform: translateX(-50%);
+  margin-top: 0;
+}
+
+.intro-section {
+  padding: 8px 24px 56px;
+}
+
 .hero__intro {
-  margin-top: 28px;
   max-width: 560px;
 }
 
@@ -89,9 +106,6 @@
 }
 
 @media (min-width: 700px) {
-  .hero {
-    padding: 96px 24px 72px;
-  }
   .hero__headline {
     font-size: 56px;
   }
@@ -104,9 +118,6 @@
 }
 
 @media (min-width: 900px) {
-  .hero {
-    padding: 128px 24px 96px;
-  }
   .hero__headline {
     font-size: 68px;
   }

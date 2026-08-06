@@ -27,7 +27,7 @@ export default function CategoryPage() {
         <span className="catalog-code">{category.code}</span>
         <h1 className="category-page__title">{category.name}</h1>
         <span className="eyebrow">
-          {projects.length} {projects.length === 1 ? 'entry' : 'entries'}
+          {projects.length} {projects.length === 1 ? 'Project' : 'Projects'}
         </span>
       </div>
 

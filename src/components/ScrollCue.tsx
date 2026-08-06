@@ -1,8 +1,35 @@
+import { useEffect, useState } from 'react';
 import { AnimatePresence, motion, useReducedMotion } from 'framer-motion';
 import './ScrollCue.css';
 
-export function ScrollCue({ show }: { show: boolean }) {
+/** Wait this long after the page loads before showing the cue. */
+const SHOW_DELAY_MS = 3000;
+
+/**
+ * A "Scroll" hint that appears under the headline — but only after the
+ * visitor has been sitting on the page for a few seconds. It disappears for
+ * good the moment they scroll at all, and it never comes back on its own
+ * (it only reappears if they leave and land on the page fresh).
+ */
+export function ScrollCue() {
   const reduce = useReducedMotion();
+  const [show, setShow] = useState(false);
+
+  useEffect(() => {
+    const timer = window.setTimeout(() => setShow(true), SHOW_DELAY_MS);
+
+    function onScroll() {
+      setShow(false);
+      window.clearTimeout(timer);
+      window.removeEventListener('scroll', onScroll);
+    }
+    window.addEventListener('scroll', onScroll, { passive: true });
+
+    return () => {
+      window.clearTimeout(timer);
+      window.removeEventListener('scroll', onScroll);
+    };
+  }, []);
 
   return (
     <AnimatePresence>

@@ -7,9 +7,10 @@ import './SiteHeader.css';
 interface SiteHeaderProps {
   name: string;
   categories: Category[];
+  email?: string;
 }
 
-export function SiteHeader({ name, categories }: SiteHeaderProps) {
+export function SiteHeader({ name, categories, email }: SiteHeaderProps) {
   const [menuOpen, setMenuOpen] = useState(false);
 
   // Close the mobile menu on any route change / resize back to desktop
@@ -41,6 +42,11 @@ export function SiteHeader({ name, categories }: SiteHeaderProps) {
               <span className="catalog-code">{cat.code}</span> {cat.name}
             </NavLink>
           ))}
+          {email && (
+            <a className="btn btn-primary site-header__cta" href={`mailto:${email}`}>
+              Get in touch ↗
+            </a>
+          )}
         </nav>
 
         {/* Mobile trigger — only shown at mobile widths */}
@@ -82,6 +88,15 @@ export function SiteHeader({ name, categories }: SiteHeaderProps) {
                 <span className="catalog-code">{cat.code}</span> {cat.name}
               </NavLink>
             ))}
+            {email && (
+              <a
+                href={`mailto:${email}`}
+                onClick={() => setMenuOpen(false)}
+                className="btn btn-primary site-header__cta-mobile"
+              >
+                Get in touch ↗
+              </a>
+            )}
           </motion.nav>
         )}
       </AnimatePresence>

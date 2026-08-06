@@ -35,7 +35,13 @@ function AppShell() {
   return (
     <>
       <CustomCssInjector />
-      {!isAdmin && <SiteHeader name={content?.home.name ?? ''} categories={content?.categories ?? []} />}
+      {!isAdmin && (
+        <SiteHeader
+          name={content?.home.name ?? ''}
+          categories={content?.categories ?? []}
+          email={content?.home.email}
+        />
+      )}
       <AnimatePresence mode="wait" initial={false}>
         <PageTransition>
           <Routes location={location} key={location.pathname}>

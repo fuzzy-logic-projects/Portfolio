@@ -3,7 +3,8 @@ import { useContent } from '../context/ContentContext';
 import { Loading, ErrorState } from '../components/Loading';
 import { Markdown } from '../components/Markdown';
 import { ScrollCue } from '../components/ScrollCue';
-import { useGuidedReveal } from '../hooks/useGuidedReveal';
+import { TypewriterHeadline } from '../components/TypewriterHeadline';
+import { useScrollReveal } from '../hooks/useScrollReveal';
 import './About.css';
 
 const sectionTransition = { duration: 0.6, ease: [0.16, 1, 0.3, 1] as const };
@@ -24,7 +25,7 @@ export default function About() {
 
   const about = content?.home.about ?? '';
   const blocks = splitIntoBlocks(about);
-  const { isRevealed, setStepRef, introActive } = useGuidedReveal(content ? blocks.length : 0);
+  const { isRevealed, setStepRef } = useScrollReveal(content ? blocks.length : 0);
 
   if (loading) return <Loading />;
   if (error || !content) return <ErrorState message={error ?? 'Something went wrong.'} />;
@@ -32,16 +33,9 @@ export default function About() {
   return (
     <div className="container about-page">
       <div className="about-page__inner">
-        <motion.h1
-          className="about-page__headline"
-          initial={reduce ? undefined : { opacity: 0, y: 24 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
-        >
-          About
-        </motion.h1>
+        <TypewriterHeadline text="About" className="about-page__headline" />
 
-        <ScrollCue show={introActive} />
+        <ScrollCue />
 
         {blocks.length === 0 ? (
           <p className="about-page__empty">Add About content from the admin dashboard.</p>

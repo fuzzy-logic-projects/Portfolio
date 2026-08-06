@@ -23,7 +23,7 @@ export function CategoryCard({ category, count, index }: CategoryCardProps) {
         <span className="catalog-code">{category.code}</span>
         <h3 className="category-card__name">{category.name}</h3>
         <span className="category-card__count">
-          {count} {count === 1 ? 'entry' : 'entries'}
+          {count} {count === 1 ? 'Project' : 'Projects'}
         </span>
         <span className="category-card__arrow" aria-hidden="true">
           →

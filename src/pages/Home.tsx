@@ -4,7 +4,8 @@ import { CategoryCard } from '../components/CategoryCard';
 import { Loading, ErrorState } from '../components/Loading';
 import { Markdown } from '../components/Markdown';
 import { ScrollCue } from '../components/ScrollCue';
-import { useGuidedReveal } from '../hooks/useGuidedReveal';
+import { TypewriterHeadline } from '../components/TypewriterHeadline';
+import { useScrollReveal } from '../hooks/useScrollReveal';
 import './Home.css';
 
 const sectionTransition = { duration: 0.6, ease: [0.16, 1, 0.3, 1] as const };
@@ -15,9 +16,10 @@ export default function Home() {
   const reduce = useReducedMotion();
 
   // Ordered list of the reveal steps present on this particular page — the
-  // headline itself isn't a step, it's always visible on load. Computed even
-  // before content arrives so the hook below is always called with a stable
-  // (if temporarily zero) step count, keeping hook order consistent.
+  // headline itself isn't a step, it lives alone in the full-height hero and
+  // is always visible on load. Computed even before content arrives so the
+  // hook below is always called with a stable (if temporarily zero) step
+  // count, keeping hook order consistent.
   const home = content?.home;
   const hasEducation = (home?.education.length ?? 0) > 0;
   const hasContact = Boolean(home?.email);
@@ -26,7 +28,7 @@ export default function Home() {
   if (hasContact) steps.push('contact');
   const stepIndex = (key: string) => steps.indexOf(key);
 
-  const { isRevealed, setStepRef, introActive } = useGuidedReveal(content ? steps.length : 0);
+  const { isRevealed, setStepRef } = useScrollReveal(content ? steps.length : 0);
 
   if (loading) return <Loading />;
   if (error || !content || !home) return <ErrorState message={error ?? 'Something went wrong.'} />;
@@ -43,31 +45,29 @@ export default function Home() {
   return (
     <div>
       <section className="hero container">
-        <motion.h1
-          className="hero__headline"
-          initial={reduce ? undefined : { opacity: 0, y: 24 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
-        >
-          {home.tagline}
-        </motion.h1>
+        <TypewriterHeadline text={home.tagline} className="hero__headline" />
+        <ScrollCue />
+      </section>
 
-        <ScrollCue show={introActive} />
-
-        <motion.div className="hero__intro" ref={setStepRef(stepIndex('intro'))} {...revealProps(stepIndex('intro'))}>
+      <motion.section
+        className="container intro-section"
+        ref={setStepRef(stepIndex('intro'))}
+        {...revealProps(stepIndex('intro'))}
+      >
+        <div className="hero__intro">
           <div className="hero__bio">
             <Markdown content={home.bio} compact />
           </div>
           {home.role && <span className="hero__role">{home.role}</span>}
-        </motion.div>
-      </section>
+        </div>
+      </motion.section>
 
       <motion.section
         className="container categories-section"
         ref={setStepRef(stepIndex('categories'))}
         {...revealProps(stepIndex('categories'))}
       >
-        <span className="eyebrow">Browse by category</span>
+        <span className="eyebrow eyebrow--light">Projects</span>
         <div className="categories-grid">
           {categories.map((cat, i) => (
             <CategoryCard
