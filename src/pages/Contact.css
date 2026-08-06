@@ -1,0 +1,50 @@
+.contact-page {
+  padding: 64px 24px 96px;
+}
+
+.contact-page__inner {
+  max-width: 480px;
+}
+
+.contact-page__headline {
+  font-size: 40px;
+  line-height: 1.15;
+}
+
+.contact-page__form {
+  margin-top: 40px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.contact-page__honeypot {
+  position: absolute;
+  left: -9999px;
+  width: 1px;
+  height: 1px;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.contact-page__error {
+  font-size: 13px;
+  color: #e08a8a;
+  margin: 0;
+}
+
+.contact-page__success {
+  margin-top: 40px;
+  color: var(--text-secondary);
+  font-family: var(--font-mono);
+  font-size: 14px;
+}
+
+@media (min-width: 900px) {
+  .contact-page {
+    padding: 128px 24px 120px;
+  }
+  .contact-page__headline {
+    font-size: 56px;
+  }
+}
