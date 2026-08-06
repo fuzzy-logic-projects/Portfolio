@@ -1,4 +1,4 @@
-import { Link, useParams } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import { useContent } from '../context/ContentContext';
 import { ProjectCard } from '../components/ProjectCard';
 import { Loading, ErrorState } from '../components/Loading';
@@ -23,10 +23,6 @@ export default function CategoryPage() {
 
   return (
     <div className="container category-page">
-      <Link to="/" className="category-page__back">
-        ← Back to index
-      </Link>
-
       <div className="category-page__header">
         <span className="catalog-code">{category.code}</span>
         <h1 className="category-page__title">{category.name}</h1>

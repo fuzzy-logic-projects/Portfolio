@@ -1,5 +1,6 @@
 .category-card {
   position: relative;
+  z-index: 0;
   display: flex;
   flex-direction: column;
   gap: 10px;
@@ -45,9 +46,10 @@
 
 @media (hover: hover) and (pointer: fine) {
   .category-card:hover {
-    transform: translateY(-4px);
+    transform: translateY(-4px) scale(1.035);
     border-color: var(--border-strong);
     background: var(--bg-raised-2);
+    z-index: 2;
   }
   .category-card:hover .category-card__corner {
     border-width: 0 22px 22px 0;

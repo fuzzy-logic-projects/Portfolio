@@ -7,6 +7,7 @@ const DEFAULT_HOME = {
   role: '',
   tagline: 'Add your headline from the admin dashboard.',
   bio: 'Add a short bio from the admin dashboard at /admin.',
+  about: '',
   email: '',
   education: [],
 };

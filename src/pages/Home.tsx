@@ -2,46 +2,71 @@ import { motion, useReducedMotion } from 'framer-motion';
 import { useContent } from '../context/ContentContext';
 import { CategoryCard } from '../components/CategoryCard';
 import { Loading, ErrorState } from '../components/Loading';
+import { Markdown } from '../components/Markdown';
+import { ScrollCue } from '../components/ScrollCue';
+import { useGuidedReveal } from '../hooks/useGuidedReveal';
 import './Home.css';
+
+const sectionTransition = { duration: 0.6, ease: [0.16, 1, 0.3, 1] as const };
+const hiddenSection = { opacity: 0, y: 24 };
 
 export default function Home() {
   const { content, loading, error } = useContent();
   const reduce = useReducedMotion();
 
+  // Ordered list of the reveal steps present on this particular page — the
+  // headline itself isn't a step, it's always visible on load. Computed even
+  // before content arrives so the hook below is always called with a stable
+  // (if temporarily zero) step count, keeping hook order consistent.
+  const home = content?.home;
+  const hasEducation = (home?.education.length ?? 0) > 0;
+  const hasContact = Boolean(home?.email);
+  const steps: string[] = ['intro', 'categories'];
+  if (hasEducation) steps.push('education');
+  if (hasContact) steps.push('contact');
+  const stepIndex = (key: string) => steps.indexOf(key);
+
+  const { isRevealed, setStepRef, introActive } = useGuidedReveal(content ? steps.length : 0);
+
   if (loading) return <Loading />;
-  if (error || !content) return <ErrorState message={error ?? 'Something went wrong.'} />;
+  if (error || !content || !home) return <ErrorState message={error ?? 'Something went wrong.'} />;
 
-  const { home, categories, projects } = content;
+  const { categories, projects } = content;
 
-  const fadeUp = (delay: number) =>
-    reduce
-      ? {}
-      : {
-          initial: { opacity: 0, y: 24 },
-          animate: { opacity: 1, y: 0 },
-          transition: { duration: 0.6, delay, ease: [0.16, 1, 0.3, 1] as const },
-        };
+  const revealProps = (index: number) => ({
+    initial: reduce ? undefined : hiddenSection,
+    animate: isRevealed(index) ? { opacity: 1, y: 0 } : hiddenSection,
+    transition: sectionTransition,
+    style: isRevealed(index) ? undefined : { pointerEvents: 'none' as const },
+  });
 
   return (
     <div>
       <section className="hero container">
-        <motion.span className="eyebrow" {...fadeUp(0)}>
-          Portfolio — Index No. 01
-        </motion.span>
-        <motion.h1 className="hero__headline" {...fadeUp(0.08)}>
+        <motion.h1
+          className="hero__headline"
+          initial={reduce ? undefined : { opacity: 0, y: 24 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
+        >
           {home.tagline}
         </motion.h1>
-        <motion.p className="hero__bio" {...fadeUp(0.16)}>
-          {home.bio}
-        </motion.p>
-        {home.role && (
-          <motion.span className="hero__role" {...fadeUp(0.22)}>
-            {home.role}
-          </motion.span>
-        )}
+
+        <ScrollCue show={introActive} />
+
+        <motion.div className="hero__intro" ref={setStepRef(stepIndex('intro'))} {...revealProps(stepIndex('intro'))}>
+          <div className="hero__bio">
+            <Markdown content={home.bio} compact />
+          </div>
+          {home.role && <span className="hero__role">{home.role}</span>}
+        </motion.div>
       </section>
 
-      <section className="container categories-section">
+      <motion.section
+        className="container categories-section"
+        ref={setStepRef(stepIndex('categories'))}
+        {...revealProps(stepIndex('categories'))}
+      >
         <span className="eyebrow">Browse by category</span>
         <div className="categories-grid">
           {categories.map((cat, i) => (
@@ -53,15 +78,13 @@ export default function Home() {
             />
           ))}
         </div>
-      </section>
+      </motion.section>
 
-      {home.education.length > 0 && (
+      {hasEducation && (
         <motion.section
           className="container education-section"
-          initial={reduce ? undefined : { opacity: 0, y: 24 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: '-80px' }}
-          transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+          ref={setStepRef(stepIndex('education'))}
+          {...revealProps(stepIndex('education'))}
         >
           <span className="eyebrow">Education</span>
           <ul className="education-list">
@@ -78,12 +101,16 @@ export default function Home() {
         </motion.section>
       )}
 
-      {home.email && (
-        <section className="container contact-section">
+      {hasContact && (
+        <motion.section
+          className="container contact-section"
+          ref={setStepRef(stepIndex('contact'))}
+          {...revealProps(stepIndex('contact'))}
+        >
           <a className="btn btn-primary" href={`mailto:${home.email}`}>
             Get in touch ↗
           </a>
-        </section>
+        </motion.section>
       )}
     </div>
   );

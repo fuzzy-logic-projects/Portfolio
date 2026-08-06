@@ -21,6 +21,7 @@ export function ProjectCard({ project, code, entryNumber, index }: ProjectCardPr
       initial={reduce ? undefined : { opacity: 0, y: 16 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.45, delay: index * 0.06, ease: [0.16, 1, 0.3, 1] }}
+      whileHover={reduce ? undefined : { scale: 1.015, transition: { duration: 0.25, ease: [0.16, 1, 0.3, 1] } }}
     >
       <button type="button" className="project-card__header" onClick={() => setOpen((v) => !v)} aria-expanded={open}>
         <div>

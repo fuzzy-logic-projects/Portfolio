@@ -2,21 +2,19 @@
   padding: 64px 24px 56px;
 }
 
-.hero .eyebrow {
-  display: block;
-  margin-bottom: 20px;
-}
-
 .hero__headline {
   font-size: 40px;
   line-height: 1.15;
   max-width: 720px;
 }
 
-.hero__bio {
-  margin-top: 20px;
+.hero__intro {
+  margin-top: 28px;
   max-width: 560px;
-  font-size: 16px;
+}
+
+.hero__bio {
+  font-size: 18px;
   line-height: 1.75;
   color: var(--text-secondary);
 }
@@ -97,6 +95,9 @@
   .hero__headline {
     font-size: 56px;
   }
+  .hero__bio {
+    font-size: 19px;
+  }
   .categories-grid {
     grid-template-columns: repeat(3, 1fr);
   }
@@ -108,5 +109,8 @@
   }
   .hero__headline {
     font-size: 68px;
+  }
+  .hero__bio {
+    font-size: 20px;
   }
 }

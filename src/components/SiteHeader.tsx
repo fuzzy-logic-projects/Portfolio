@@ -25,7 +25,6 @@ export function SiteHeader({ name, categories }: SiteHeaderProps) {
     <header className="site-header">
       <div className="container site-header__row">
         <Link to="/" className="site-header__brand" onClick={() => setMenuOpen(false)}>
-          <span className="eyebrow">Index</span>
           <span className="site-header__name">{name}</span>
         </Link>
 
@@ -33,6 +32,9 @@ export function SiteHeader({ name, categories }: SiteHeaderProps) {
         <nav className="site-header__nav-desktop" aria-label="Primary">
           <NavLink to="/" end className="site-header__link">
             Home
+          </NavLink>
+          <NavLink to="/about" className="site-header__link">
+            About
           </NavLink>
           {categories.map((cat) => (
             <NavLink key={cat.id} to={`/projects/${cat.slug}`} className="site-header__link">
@@ -66,6 +68,9 @@ export function SiteHeader({ name, categories }: SiteHeaderProps) {
           >
             <NavLink to="/" end onClick={() => setMenuOpen(false)} className="site-header__link-mobile">
               Home
+            </NavLink>
+            <NavLink to="/about" onClick={() => setMenuOpen(false)} className="site-header__link-mobile">
+              About
             </NavLink>
             {categories.map((cat) => (
               <NavLink

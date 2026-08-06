@@ -10,6 +10,7 @@ export interface HomeContent {
   role: string;
   tagline: string;
   bio: string;
+  about: string;
   email: string;
   education: EducationEntry[];
 }

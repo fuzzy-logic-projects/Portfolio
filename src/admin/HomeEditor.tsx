@@ -3,7 +3,7 @@ import type { EducationEntry, HomeContent } from '../types';
 import { api } from '../lib/api';
 
 export function HomeEditor({ initial, onSaved }: { initial: HomeContent; onSaved: () => void }) {
-  const [form, setForm] = useState<HomeContent>(initial);
+  const [form, setForm] = useState<HomeContent>({ ...initial, about: initial.about ?? '' });
   const [saving, setSaving] = useState(false);
   const [status, setStatus] = useState<string | null>(null);
 
@@ -95,6 +95,27 @@ export function HomeEditor({ initial, onSaved }: { initial: HomeContent; onSaved
           value={form.bio}
           onChange={(e) => updateField('bio', e.target.value)}
         />
+        <p className="admin-panel__hint">
+          Markdown supported — **bold**, *italic*, and line breaks are preserved.
+        </p>
+      </div>
+
+      <div>
+        <label className="field-label" htmlFor="about">
+          About (Markdown)
+        </label>
+        <textarea
+          id="about"
+          className="field-input"
+          rows={12}
+          placeholder={'# A bit about me\n\nWrite as much as you like — headings, **bold**, *italic*, lists, links.'}
+          value={form.about}
+          onChange={(e) => updateField('about', e.target.value)}
+        />
+        <p className="admin-panel__hint">
+          Shown on the About page, linked from the nav. Supports Markdown: # headings, **bold**,
+          *italic*, lists, links. A blank line starts a new block; a single line break is kept as-is.
+        </p>
       </div>
 
       <div>
