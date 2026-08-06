@@ -4,6 +4,8 @@
 
 .contact-page__inner {
   max-width: 480px;
+  margin: 0 auto;
+  text-align: center;
 }
 
 .contact-page__headline {
@@ -16,6 +18,7 @@
   display: flex;
   flex-direction: column;
   gap: 20px;
+  text-align: left;
 }
 
 .contact-page__honeypot {
