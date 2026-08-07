@@ -33,7 +33,7 @@
 .hero__bio {
   font-size: 18px;
   line-height: 1.75;
-  color: var(--text-secondary);
+  color: var(--text-primary);
 }
 
 .hero__role {

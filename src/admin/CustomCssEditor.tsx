@@ -14,7 +14,7 @@ const DEFAULT_COLORS: Record<ColorKey, string> = {
   primary: '#f47521',
   secondary: '#c9a88c',
   accent: '#ffffff',
-  bodyText: '#f2f2f0',
+  bodyText: '#dcdcdc',
   textSecondary: '#b3aea8',
   textMuted: '#726d66',
 };
