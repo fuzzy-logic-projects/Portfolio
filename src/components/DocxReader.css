@@ -1,0 +1,195 @@
+.docx-reader {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  display: flex;
+  flex-direction: column;
+  background: var(--bg);
+  color: var(--text-primary);
+}
+
+/* Some browsers size the fullscreen element oddly by default — pin it. */
+.docx-reader:fullscreen {
+  width: 100%;
+  height: 100%;
+}
+
+.docx-reader::backdrop {
+  background: var(--bg);
+}
+
+.docx-reader__header {
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 16px 24px;
+  background: var(--bg-raised);
+  border-bottom: 1px solid var(--border);
+}
+
+.docx-reader__title {
+  font-family: var(--font-mono);
+  font-size: 13px;
+  color: var(--text-secondary);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.docx-reader__actions {
+  display: flex;
+  flex-shrink: 0;
+  gap: 10px;
+}
+
+.docx-reader__btn {
+  padding: 8px 14px;
+  font-size: 12px;
+}
+
+.docx-reader__content {
+  flex: 1;
+  overflow-y: auto;
+  padding: 48px 24px 80px;
+}
+
+.docx-reader__status {
+  max-width: 640px;
+  margin: 60px auto 0;
+  text-align: center;
+  color: var(--text-secondary);
+  font-size: 14px;
+}
+
+.docx-reader__status a {
+  color: var(--gold);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+.docx-reader__body {
+  max-width: 720px;
+  margin: 0 auto;
+  font-size: 17px;
+  line-height: 1.8;
+  color: var(--text-primary);
+}
+
+.docx-reader__body > * + * {
+  margin-top: 1em;
+}
+
+.docx-reader__body h1,
+.docx-reader__body h2,
+.docx-reader__body h3,
+.docx-reader__body h4,
+.docx-reader__body h5,
+.docx-reader__body h6 {
+  font-family: var(--font-display);
+  color: var(--accent-light);
+  font-weight: 600;
+  line-height: 1.3;
+  margin-top: 1.4em;
+}
+
+.docx-reader__body h1 {
+  font-size: 1.9em;
+}
+
+.docx-reader__body h2 {
+  font-size: 1.5em;
+}
+
+.docx-reader__body h3 {
+  font-size: 1.25em;
+}
+
+.docx-reader__body h4,
+.docx-reader__body h5,
+.docx-reader__body h6 {
+  font-size: 1.1em;
+}
+
+.docx-reader__body strong {
+  color: var(--accent-light);
+  font-weight: 600;
+}
+
+.docx-reader__body em {
+  font-style: italic;
+}
+
+.docx-reader__body a {
+  color: var(--gold);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+.docx-reader__body ul,
+.docx-reader__body ol {
+  padding-left: 1.4em;
+}
+
+.docx-reader__body li + li {
+  margin-top: 0.5em;
+}
+
+.docx-reader__body blockquote {
+  border-left: 2px solid var(--border-strong);
+  padding-left: 1em;
+  color: var(--text-secondary);
+}
+
+.docx-reader__body hr {
+  border: none;
+  border-top: 1px solid var(--border);
+  margin: 2em 0;
+}
+
+.docx-reader__body img {
+  max-width: 100%;
+  border-radius: var(--radius);
+}
+
+.docx-reader__body table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.9em;
+}
+
+.docx-reader__body th,
+.docx-reader__body td {
+  border: 1px solid var(--border);
+  padding: 8px 10px;
+  text-align: left;
+}
+
+.docx-reader__body th {
+  font-family: var(--font-mono);
+  color: var(--text-secondary);
+  font-weight: 500;
+}
+
+@media (max-width: 640px) {
+  .docx-reader__header {
+    padding: 14px 16px;
+  }
+
+  .docx-reader__title {
+    display: none;
+  }
+
+  .docx-reader__btn {
+    padding: 8px 10px;
+  }
+
+  .docx-reader__content {
+    padding: 32px 18px 60px;
+  }
+
+  .docx-reader__body {
+    font-size: 16px;
+  }
+}

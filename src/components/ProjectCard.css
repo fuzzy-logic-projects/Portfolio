@@ -70,13 +70,16 @@
   padding: 0;
 }
 
-.project-card__files a {
+.project-card__files a,
+.project-card__files button {
   font-family: var(--font-mono);
   font-size: 12px;
   color: var(--gold);
+  background: none;
   border: 1px solid var(--border-strong);
   border-radius: var(--radius);
   padding: 6px 10px;
+  cursor: pointer;
   transition: background 0.2s var(--ease-out);
 }
 
@@ -98,7 +101,8 @@
     border-color: var(--border-strong);
     z-index: 2;
   }
-  .project-card__files a:hover {
+  .project-card__files a:hover,
+  .project-card__files button:hover {
     background: var(--bg-raised-2);
   }
   .project-card__link:hover {
