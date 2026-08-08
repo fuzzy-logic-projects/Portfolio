@@ -23,6 +23,7 @@ export function ProjectCard({ project, code, entryNumber, index }: ProjectCardPr
   const [readingFile, setReadingFile] = useState<ProjectFile | null>(null);
   const reduce = useReducedMotion();
   const entryId = `${code}-${String(entryNumber).padStart(2, '0')}`;
+  const readLabel = project.articleType?.trim() ? `Read ${project.articleType.trim()}` : 'Read';
 
   return (
     <>
@@ -62,7 +63,7 @@ export function ProjectCard({ project, code, entryNumber, index }: ProjectCardPr
                       isDocx(file) ? (
                         <li key={file.url}>
                           <button type="button" onClick={() => setReadingFile(file)}>
-                            Read
+                            {readLabel}
                           </button>
                         </li>
                       ) : (

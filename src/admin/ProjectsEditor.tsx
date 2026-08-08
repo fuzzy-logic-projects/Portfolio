@@ -32,6 +32,7 @@ export function ProjectsEditor({
         link: '',
         date: '',
         files: [],
+        articleType: '',
       },
     ]);
   }
@@ -148,6 +149,16 @@ export function ProjectsEditor({
                 onChange={(e) => updateProject(project.id, { date: e.target.value })}
               />
             </div>
+          </div>
+
+          <div>
+            <label className="field-label">Article type (optional — content writing only)</label>
+            <input
+              className="field-input"
+              placeholder="e.g. SEO Article, Essay, News"
+              value={project.articleType ?? ''}
+              onChange={(e) => updateProject(project.id, { articleType: e.target.value })}
+            />
           </div>
 
           <div>

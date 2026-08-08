@@ -36,6 +36,7 @@ export interface Project {
   link: string;
   date: string;
   files: ProjectFile[];
+  articleType?: string;
 }
 
 export interface SiteContent {
